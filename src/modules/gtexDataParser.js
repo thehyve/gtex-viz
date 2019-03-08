@@ -4,8 +4,8 @@
  */
 "use strict";
 export function getGtexUrls(){
-    const host = 'https://gtexportal.org/rest/v1/';
-    // const host = 'http://local.gtex.org/rest/v1/';
+    // const host = 'https://gtexportal.org/rest/v1/';
+    const host = 'http://local.gtex.org/rest/v1/';
     return {
         // gene-eqtl visualizer specific
         singleTissueEqtl: host + 'association/singleTissueEqtl?format=json&datasetId=gtex_v8&gencodeId=',
