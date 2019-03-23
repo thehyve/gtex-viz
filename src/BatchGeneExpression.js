@@ -687,3 +687,9 @@ function _sortTissues (xlist, dmap, tissueDict){
 
 }
 
+export var BatchGeneExpression = {
+    createDatasetMenu: createDatasetMenu,
+    launchTopExpressed: launchTopExpressed,
+    launch: launch,
+    searchById: searchById
+};

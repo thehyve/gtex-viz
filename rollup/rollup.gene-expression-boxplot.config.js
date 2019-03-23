@@ -9,8 +9,12 @@ export default {
         file: 'build/js/gene-expression-boxplot.bundle.min.js',
         format: 'iife',
         name: name,
-        sourcemap: 'inline'
+        sourcemap: 'inline',
+        globals: {
+            jquery: '$'
+        }
     },
+    external: ['jquery'],
     plugins: [
         nodeResolve({jsnext: true, main: true}),
         uglify({}, minify)

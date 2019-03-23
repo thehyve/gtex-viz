@@ -18,6 +18,7 @@ import GroupedViolin from "./modules/GroupedViolin";
 import IsoformTrackViewer from "./modules/IsoformTrackViewer";
 import BubbleMap from "./modules/BubbleMap";
 import HalfMap from "./modules/HalfMap";
+import {render} from './TranscriptBrowser';
 
 export const demoData = {
     heatmap:generateRandomMatrix({x:50, y:10, scaleFactor:1000}),
@@ -547,3 +548,12 @@ export function groupedViolinPlot(par=violinDemoConfig){
 
 }
 
+export var GTExViz = {
+    demoData: demoData,
+    ldPlot: ldPlot,
+    transcriptTracks: transcriptTracks,
+    bubblemap: bubblemap,
+    heatmap: heatmap,
+    dendroHeatmap: dendroHeatmap,
+    groupedViolinPlot: groupedViolinPlot
+};

@@ -2,6 +2,7 @@
  * Copyright © 2015 - 2018 The Broad Institute, Inc. All rights reserved.
  * Licensed under the BSD 3-clause license (https://github.com/broadinstitute/gtex-viz/blob/master/LICENSE.md)
  */
+import jQuery from 'jquery';
 import {select, selectAll} from "d3-selection";
 import {scaleBand} from "d3-scale";
 import {nest} from "d3-collection";
@@ -37,7 +38,7 @@ export default class Heatmap {
         // peripheral features
         /// Tooltip
         /// create the tooltip DIV
-        if ($(`#${tooltipId}`).length == 0) $('<div/>').attr('id', tooltipId).appendTo($('body'));
+        if (jQuery(`#${tooltipId}`).length == 0) jQuery('<div/>').attr('id', tooltipId).appendTo(jQuery('body'));
         this.tooltip = new Tooltip(tooltipId);
         select(`#${tooltipId}`).classed('heatmap-tooltip', true);
 

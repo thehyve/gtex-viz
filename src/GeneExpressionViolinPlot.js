@@ -580,3 +580,7 @@ function _redrawViolinPlot(vplot, ids) {
     vplot.updateYScale(yScaleLabel);
     _customizePlot(vplot, ids);
 }
+
+export var GeneExpressionViolinplot = {
+    launch: launch
+};

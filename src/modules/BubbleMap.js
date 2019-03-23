@@ -4,10 +4,12 @@
  */
 
 "use strict";
+
+import jQuery from 'jquery';
 import {nest} from "d3-collection";
-import {extent, max, min} from "d3-array";
-import {select, selectAll, event} from "d3-selection";
-import {scaleBand, scaleLinear, scaleSqrt} from "d3-scale";
+import {max} from "d3-array";
+import {select, event} from "d3-selection";
+import {scaleBand, scaleSqrt} from "d3-scale";
 import {brushX} from "d3-brush";
 
 import Tooltip from "./Tooltip";
@@ -31,9 +33,9 @@ export default class BubbleMap {
     }
 
     addTooltip(parentId){
-        let parent = $(`#${parentId}`);
+        let parent = jQuery(`#${parentId}`);
         let tooltipId = parentId + '-tooltip';
-        if ($(`#${tooltipId}`).length == 0) $('<div/>').attr('id', tooltipId).appendTo(parent);
+        if (jQuery(`#${tooltipId}`).length == 0) jQuery('<div/>').attr('id', tooltipId).appendTo(parent);
         this.tooltip = new Tooltip(tooltipId);
         select(`#${tooltipId}`).classed('bubblemap-tooltip', true);
     }

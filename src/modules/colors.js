@@ -192,7 +192,7 @@ export function drawColorLegend(title, dom, scale, config, useLog, ticks=10, bas
 
     const g = legends.enter().append("g").classed("legend", true);
 
-    if (orientation == 'h'){
+    if (orientation === 'h'){
          // legend title
         dom.append("text")
             .attr("class", "color-legend")
