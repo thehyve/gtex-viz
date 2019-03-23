@@ -41,3 +41,7 @@ export function launch(rootId, gencodeId, urls=getGtexUrls()) {
             boxplot.render(ids.rootId, plotOptions);
         });
 }
+
+export var GeneExpressionBoxplot = {
+    launch: launch
+};

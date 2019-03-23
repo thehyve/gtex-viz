@@ -42,3 +42,7 @@ export function render(par, gencodeId, variantId, tissueId, groupName=undefined,
         })
 
 }
+
+export var EqtlViolinPlot = {
+    render: render
+};

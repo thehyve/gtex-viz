@@ -5,9 +5,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
               integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-              crossorigin="anonymous">        <link rel="stylesheet" type="text/css" href="/css/dendrogram.css">
-        <link rel="stylesheet" type="text/css" href="/css/expressMap.css">
-        <link rel="stylesheet" type="text/css" href="/css/isoform.css">
+              crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/dendrogram.css">
+        <link rel="stylesheet" type="text/css" href="../css/expressMap.css">
+        <link rel="stylesheet" type="text/css" href="../css/isoform.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400" >
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css">
 
@@ -110,12 +111,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.full.min.js"></script>
 
-    <script src="https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js"></script>
-    <script src="/build/js/transcript-browser.bundle.dev.js"></script>
+    <script src="../build/js/transcript-browser.bundle.dev.js"></script>
     <script>
         $(document).ready(function(){
             $('#gene').keypress(function(e){
-                if(e.keyCode == 13){
+                if(e.keyCode === 13){
                     // bind the enter key
                     e.preventDefault(); // Note: prevent the default behavior of the enter key, which is refreshing the page
                     init("exon");

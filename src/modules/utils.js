@@ -11,12 +11,13 @@
  * @return {Selection} the d3 selection object of the SVG
  */
 
+import jQuery from 'jquery';
 import {select} from "d3-selection";
 import {range} from "d3-array";
 
 export function checkDomId(id){
     // test input params
-    if ($(`#${id}`).length == 0) {
+    if (jQuery(`#${id}`).length == 0) {
         let error = `Input Error: DOM ID ${id} is not found.`;
         alert(error);
         throw error;
@@ -80,14 +81,14 @@ export function downloadSvg(svgObj, downloadFileName, tempDownloadDivId){
     var styles = parseCssStyles(svgObj.get());
     $svgCopy.prepend(styles);
 
-    $("#" + tempDownloadDivId).html('').hide();
-    var svgHtml = $("#" + tempDownloadDivId).append($svgCopy).html();
+    jQuery("#" + tempDownloadDivId).html('').hide();
+    var svgHtml = jQuery("#" + tempDownloadDivId).append($svgCopy).html();
 
     var svgBlob = new Blob([svgHtml], {type: "image/svg+xml"});
     saveAs(svgBlob, downloadFileName);
 
     // clear the temp download div
-    $("#" + tempDownloadDivId).html('').hide();
+    jQuery("#" + tempDownloadDivId).html('').hide();
 }
 /**
  * A function for parsing the CSS style sheet and including the style properties in the downloadable SVG.
@@ -112,7 +113,7 @@ export function parseCssStyles (dom) {
                     var selector = rule.selectorText === undefined? rule.selectorText : rule.selectorText.replace(`#${dom[0].id} `, '');
                     //Some selectors won't work, and most of these don't matter.
                     try {
-                        elems = $(dom).find(selector);
+                        elems = jQuery(dom).find(selector);
                     } catch (e) {
                         elems = [];
                     }

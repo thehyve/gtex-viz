@@ -1029,4 +1029,6 @@ function  createDialog(parentDivId, dialogDivId, title){
     });
 }
 
-
+export var GeneEqtlVisualizer = {
+    render: render
+};

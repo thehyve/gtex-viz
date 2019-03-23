@@ -2,20 +2,36 @@
   "name": "gtex-d3",
   "version": "0.0.1",
   "description": "GTEx D3 Repository",
-  "main": "index.js",
+  "main": "build/gtexViz.js",
+  "module": "build/gtexViz.es.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c rollup/rollup.config.js",
+    "build-prod": "NODE_ENV=prod rollup -c rollup/rollup.config.js"
   },
   "author": "Katherine Huang",
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "@svgr/rollup": "^4.1.0",
+    "rollup": "^1.7.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-copy": "^0.2.3",
     "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-url": "^2.2.0"
   },
+  "files": [
+    "build",
+    "css"
+  ],
   "dependencies": {
     "d3": "^5.0.0",
-    "uglify-es": "^3.3.9"
+    "file-saver": "^2.0.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
   }
 }

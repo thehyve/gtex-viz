@@ -3,6 +3,7 @@
  * Licensed under the BSD 3-clause license (https://github.com/broadinstitute/gtex-viz/blob/master/LICENSE.md)
  */
 
+import jQuery from 'jquery';
 import {ascending, median, quantile, extent, min, max} from 'd3-array';
 import {select} from 'd3-selection';
 import {scaleBand, scaleLinear, scaleLog} from 'd3-scale';
@@ -199,7 +200,7 @@ export default class Boxplot {
     }
 
     createTooltip(tooltipDomId) {
-        if ($(`#${tooltipDomId}`).length == 0) $('<div/>').attr('id', tooltipDomId).appendTo($('body'));
+        if (jQuery(`#${tooltipDomId}`).length == 0) jQuery('<div/>').attr('id', tooltipDomId).appendTo(jQuery('body'));
         this.tooltip = new Tooltip(tooltipDomId);
         select(`#${tooltipDomId}`).attr('class', 'boxplot-tooltip');
     }

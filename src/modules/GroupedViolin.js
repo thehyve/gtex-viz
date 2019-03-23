@@ -23,12 +23,13 @@ Input data structure: a list of data object with the following structure:
 ]
 */
 
+import jQuery from 'jquery';
 import {extent, median, ascending, quantile, max, min} from "d3-array";
 import {nest} from "d3-collection";
 import {scaleBand, scaleLinear} from "d3-scale";
 import {area} from "d3-shape";
-import {axisTop, axisBottom, axisLeft} from "d3-axis";
-import {select, selectAll, event} from "d3-selection";
+import {axisBottom, axisLeft} from "d3-axis";
+import {select, event} from "d3-selection";
 import {brush} from "d3-brush";
 import {randomNormal} from "d3-random";
 
@@ -298,7 +299,7 @@ export default class GroupedViolin {
      * @returns {Tooltip}
      */
     createTooltip(domId){
-        if ($(`#${domId}`).length == 0) $('<div/>').attr('id', domId).appendTo($('body'));
+        if (jQuery(`#${domId}`).length == 0) jQuery('<div/>').attr('id', domId).appendTo(jQuery('body'));
         this.tooltip = new Tooltip(domId);
         select(`#${domId}`).classed('violin-tooltip', true);
         return this.tooltip;

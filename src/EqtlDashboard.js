@@ -431,6 +431,6 @@ function _apiCall(url, tissue){
 
 }
 
-
-
-
+export var EqtlDashboard = {
+    build: build
+};

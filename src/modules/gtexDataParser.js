@@ -77,13 +77,13 @@ export function parseDynEqtl(json){
     json.genotypes = json.genotypes.map((d)=>parseFloat(d));
 
     json.homoRefExp = json.expression_values.filter((d,i) => {
-        return json.genotypes[i] == 0
+        return json.genotypes[i] === 0
     });
     json.homoAltExp = json.expression_values.filter((d,i) => {
-        return json.genotypes[i] == 2
+        return json.genotypes[i] === 2
     });
     json.heteroExp = json.expression_values.filter((d,i) => {
-        return json.genotypes[i] == 1
+        return json.genotypes[i] === 1
     });
 
     // generate genotype text labels
@@ -132,7 +132,7 @@ export function parseSingleTissueEqtls(data, tissueSiteTable = undefined){
 export function parseGenes(data, single=false, geneId=null){
     const attr = 'gene';
     if(!data.hasOwnProperty(attr)) throw "Parsing Error: attribute gene doesn't exist.";
-    if (data.gene.length==0){
+    if (data.gene.length===0){
          alert("No gene is found");
          throw "Fatal Error: gene(s) not found";
      }
@@ -140,13 +140,12 @@ export function parseGenes(data, single=false, geneId=null){
         if (geneId === null) throw "Please provide a gene ID for search results validation";
         if (data.gene.length>1) { // when a single gene ID has multiple matches
              let filtered = data.gene.filter((g)=>{
-                 return g.geneSymbolUpper==geneId.toUpperCase() || g.gencodeId == geneId.toUpperCase()
+                 return g.geneSymbolUpper===geneId.toUpperCase() || g.gencodeId === geneId.toUpperCase()
              });
              if (filtered.length > 1) {
                  alert("Fatal Error: input gene ID is not unique.");
                  throw "Fatal Error: input gene ID is not unique.";
-                 return
-             } else if (filtered.length == 0){
+             } else if (filtered.length === 0){
                  alert("No gene is found with " + geneId);
                  throw "Fatal Error: gene not found";
              }
@@ -226,7 +225,7 @@ export function parseTissueSites(data, forEqtl=false){
     ['tissueSite','tissueSiteDetailId','tissueSiteDetail'].forEach((d)=>{
         if (!tissues[0].hasOwnProperty(d)) throw `parseTissueSites attr error. ${d} is not found`;
     });
-    tissues = forEqtl==false?tissues:tissues.filter((d)=>{return !invalidTissues.includes(d.tissueSiteDetailId)}); // an array of tissueSiteDetailId objects
+    tissues = forEqtl===false?tissues:tissues.filter((d)=>{return !invalidTissues.includes(d.tissueSiteDetailId)}); // an array of tissueSiteDetailId objects
 
     // build the tissueGroups lookup dictionary indexed by the tissue group name (i.e. the tissue main site name)
     let tissueGroups = tissues.reduce((arr, d)=>{
@@ -244,7 +243,7 @@ export function parseTissueSites(data, forEqtl=false){
     // by replacing the group's name with the single site's name -- resulting a better Alphabetical order of the tissue groups
 
     Object.keys(tissueGroups).forEach((d)=>{
-        if (tissueGroups[d].length == 1){ // a single-site group
+        if (tissueGroups[d].length === 1){ // a single-site group
             let site = tissueGroups[d][0]; // the single site
             delete tissueGroups[d]; // remove the old group in the dictionary
             tissueGroups[site.name] = [site]; // create a new group with the site's name
@@ -299,7 +298,7 @@ export function parseJunctions(json){
             throw 'Parsing Error: required junction attribute is missing: ' + d;
         }
     });
-    return json[attr].filter((d)=>d.tissueSiteDetailId=='Liver')
+    return json[attr].filter((d)=>d.tissueSiteDetailId==='Liver')
                     .map((d) => {
                         let pos = d.junctionId.split('_');
                         return {
@@ -425,7 +424,7 @@ export function parseJunctionExpression(data){
     const junctions = data[attr];
 
     // error-checking
-    if (junctions === undefined || junctions.length == 0) {
+    if (junctions === undefined || junctions.length === 0) {
         console.warn('No junction data found');
         return undefined;
     }
@@ -527,7 +526,7 @@ export function parseMedianExpression(data){
     const adjust = 1;
     // parse GTEx median gene expression
     // error-checking the required attributes:
-    if (data[attr].length == 0) throw 'parseMedianExpression finds no data.';
+    if (data[attr].length === 0) throw 'parseMedianExpression finds no data.';
     ['median', 'tissueSiteDetailId', 'gencodeId'].forEach((d)=>{
         if (!data[attr][0].hasOwnProperty(d)) {
             console.error(data[attr][0]);
@@ -636,7 +635,7 @@ export function parseGeneExpressionForBoxplot(data, tissues=undefined, colors=un
  */
 function generateShortVariantId(id){
     let temp = id.split("_");
-    if(temp[2].length == 1 && temp[3].length == 1) return id;
+    if(temp[2].length === 1 && temp[3].length === 1) return id;
     if(temp[2].length > temp[3].length) {
         temp[2] = "del";
         temp.splice(3, 1); // delete the alt

@@ -12,11 +12,15 @@ const name= 'GeneExpressionBoxplot';
 export default {
     input: 'src/' + name + '.js',
     output: {
-        file: process.env.NODE_ENV=='prod'?'build/js/gene-expression-boxplot.bundle.min.js':'build/js/gene-expression-boxplot.bundle.dev.js',
+        file: process.env.NODE_ENV==='prod'?'build/js/gene-expression-boxplot.bundle.min.js':'build/js/gene-expression-boxplot.bundle.dev.js',
         format: 'iife',
         name: name,
-        sourcemap: 'inline'
+        sourcemap: 'inline',
+        globals: {
+            jquery: '$'
+        }
     },
+    external: ['jquery'],
     plugins: [
         nodeResolve({jsnext: true, main: true}),
         replace({

@@ -7,16 +7,18 @@
  * This class uses a lot of jQuery for dom element manipulation
  */
 
+import jQuery from 'jquery';
 import {select} from "d3-selection";
 import {parseCssStyles} from "./utils";
+import saveAs from 'file-saver';
 
 export default class Toolbar {
     constructor(domId, tooltip=undefined, vertical=false){
-        $(`#${domId}`).show(); // if hidden
+        jQuery(`#${domId}`).show(); // if hidden
 
         // add a new bargroup div to domID with bootstrap button classes
         const btnClasses = vertical?'btn-group-vertical btn-group-sm': 'btn-group btn-group-sm';
-        this.bar = $('<div/>').addClass(btnClasses).appendTo(`#${domId}`);
+        this.bar = jQuery('<div/>').addClass(btnClasses).appendTo(`#${domId}`);
         this.buttons = {};
         this.tooltip = tooltip;
     }
@@ -62,9 +64,9 @@ export default class Toolbar {
      * Dependencies: Bootstrap, jQuery, Fontawesome
      */
     createButton(id, icon='fa-download'){
-        const $button = $('<a/>').attr('id', id)
+        const $button = jQuery('<a/>').attr('id', id)
             .addClass('btn btn-default').appendTo(this.bar);
-        $('<i/>').addClass(`fa ${icon}`).appendTo($button);
+        jQuery('<i/>').addClass(`fa ${icon}`).appendTo($button);
         this.buttons[id] = $button;
         return $button;
     }
@@ -85,8 +87,8 @@ export default class Toolbar {
      * Dependencies: FileSaver
      */
     downloadSvg(svgId, fileName, cloneId){
-        // let svgObj = $($($(`${"#" +svgId} svg`))[0]); // complicated jQuery to get to the SVG object
-        let svgObj = $($($(`${"#" +svgId}`))[0]);
+        // let svgObj = jQuery(jQuery(jQuery(`${"#" +svgId} svg`))[0]); // complicated jQuery to get to the SVG object
+        let svgObj = jQuery(jQuery(jQuery(`${"#" +svgId}`))[0]);
         let $svgCopy = svgObj.clone()
         .attr("version", "1.1")
         .attr("xmlns", "http://www.w3.org/2000/svg");
@@ -95,13 +97,13 @@ export default class Toolbar {
         let styles = parseCssStyles(svgObj.get());
         $svgCopy.prepend(styles);
 
-        $("#" + cloneId).html('').hide(); // make sure the copyID is invisible
-        let svgHtml = $(`#${cloneId}`).append($svgCopy).html();
+        jQuery("#" + cloneId).html('').hide(); // make sure the copyID is invisible
+        let svgHtml = jQuery(`#${cloneId}`).append($svgCopy).html();
 
         let svgBlob = new Blob([svgHtml], {type: "image/svg+xml"});
-        saveAs(svgBlob, fileName); // this is a FileSaver function....
+        saveAs(svgBlob, fileName);
 
         // clear the temp download div
-        $(`#${cloneId}`).html('').hide();
+        jQuery(`#${cloneId}`).html('').hide();
     }
 }

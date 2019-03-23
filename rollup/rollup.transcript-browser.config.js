@@ -11,12 +11,17 @@ echo $NODE_ENV
 const name = 'TranscriptBrowser';
 export default {
     input: 'src/' + name + '.js',
-    output: {
-        file: process.env.NODE_ENV=='prod'?'build/js/transcript-browser.bundle.min.js':'build/js/transcript-browser.bundle.dev.js',
-        format: 'iife'
-    },
-    sourcemap: 'inline',
-    name: name,
+    output: [
+        {
+            name: name,
+            file: process.env.NODE_ENV==='prod'?'build/js/transcript-browser.bundle.min.js':'build/js/transcript-browser.bundle.dev.js',
+            format: 'iife',
+            globals: {
+                jquery: '$'
+            }
+        }
+    ],
+    external: ['jquery'],
     plugins: [
         nodeResolve({jsnext: true, main: true}),
         replace({
