@@ -19805,15 +19805,25 @@ class IsoformTrackViewer {
  * Licensed under the BSD 3-clause license (https://github.com/broadinstitute/gtex-viz/blob/master/LICENSE.md)
  */
 /**
+ * Function that fetches JSON data from a URL.
+ *
+ * @callback FetchJson
+ * @param {RequestInfo} info
+ * @param {RequestInit} init
+ * @return {object} the JSON object
+ */
+
+/**
  * Render expression heatmap, gene model, and isoform tracks
  * @param type {enum} isoform, exon, junction
  * @param geneId {String} a gene name or gencode ID
  * @param rootId {String} the DOM ID of the SVG
  * @param urls {Object} of the GTEx web service urls with attr: geneId, tissue, geneModelUnfiltered, geneModel, junctionExp, exonExp
+ * @param fetchJson {FetchJson} Function that fetches JSON data from a URL (default: json from d3-fetch)
  */
 
-function render(type, geneId, rootId, urls = getGtexUrls()) {
-  json(urls.geneId + geneId, {
+function render(type, geneId, rootId, urls = getGtexUrls(), fetchJson = json) {
+  fetchJson(urls.geneId + geneId, {
     credentials: 'include'
   }) // query the gene by geneId--gene name or gencode ID with or without versioning
   .then(function (data) {
@@ -19821,21 +19831,21 @@ function render(type, geneId, rootId, urls = getGtexUrls()) {
     const gene = parseGenes(data, true, geneId);
     const gencodeId = gene.gencodeId; // build the promises
 
-    const promises = [json(urls.tissue, {
+    const promises = [fetchJson(urls.tissue, {
       credentials: 'include'
-    }), json(urls.geneModelUnfiltered + gencodeId, {
+    }), fetchJson(urls.geneModelUnfiltered + gencodeId, {
       credentials: 'include'
-    }), json(urls.geneModel + gencodeId, {
+    }), fetchJson(urls.geneModel + gencodeId, {
       credentials: 'include'
-    }), json(urls.transcript + gencodeId, {
+    }), fetchJson(urls.transcript + gencodeId, {
       credentials: 'include'
-    }), json(urls.junctionExp + gencodeId, {
+    }), fetchJson(urls.junctionExp + gencodeId, {
       credentials: 'include'
-    }), json(urls.exonExp + gencodeId, {
+    }), fetchJson(urls.exonExp + gencodeId, {
       credentials: 'include'
-    }), json(urls.transcriptExp + gencodeId, {
+    }), fetchJson(urls.transcriptExp + gencodeId, {
       credentials: 'include'
-    }), json(urls.exon + gencodeId, {
+    }), fetchJson(urls.exon + gencodeId, {
       credentials: 'include'
     })];
     Promise.all(promises).then(function (args) {
